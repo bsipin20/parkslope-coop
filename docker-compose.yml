@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      target: dev
+    volumes:
+      - .:/opt/app/api
+    environment:
+      API_SERVER_ADDR: ":3000"
+    ports:
+    - "3000:3000"
+    networks: # Networks to join (Services on the same network can communicate with each other using their name)
+      - backend
+
+networks:
+  backend:    

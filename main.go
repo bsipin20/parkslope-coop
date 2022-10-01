@@ -10,13 +10,22 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func Split(r rune) bool {
-    return r == "$" || r == 'each' || r == 'per'
-}
-
 func parseItem(str string) []string {
-	split := strings.Split(str, Split)
-	return split
+	split := strings.Split(str, "$")
+	item_split := split[1]
+	if strings.Contains(item_split, "each") {
+		result := strings.Split(item_split, "each")
+		price, location := result[0], result[1]
+		return [3]string{split[0], price, location}
+	} else if strings.Contains(item_split, "per") {
+		result := strings.Split(item_split, "per")
+		price, location := result[0], result[1]
+		return [3]string{split[0], price, location}
+	} else {
+		price := item_split
+		location := nil
+		return [3]string{split[0], price, location}
+	}
 }
 
 func goGet() {
