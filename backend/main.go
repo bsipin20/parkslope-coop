@@ -36,7 +36,6 @@ func blogHandler(w http.ResponseWriter, r *http.Request) {
 	//var titles []string
 	mapObject := map[string]int{}
 	sum := 1
-	
 	for rows.Next() {
 		var title string
 		err = rows.Scan(&title)
@@ -64,41 +63,29 @@ func prepare() error {
 		return err
 	}
 	defer db.Close()
-
 	for i := 0; i < 5; i++ {
 		if err := db.Ping(); err == nil {
 			break
 		}
 		time.Sleep(time.Second)
 	}
-
 	log.Print("Prepare drop table...")
-
 	if _, err := db.Exec("DROP TABLE IF EXISTS blog"); err != nil {
 		return err
 	}
-
 	s := sqlfile.New()
-
 	err = s.File("create_tables.sql")
-
 	if err != nil {
 		return err
 	}
-
 	log.Print("create db...")
-
 	err = s.File("insert_records.sql")
-
 	if err != nil {
 		return err
 	}
-
 	_, err = s.Exec(db)
-
 	if err != nil {
 		return err
 	}
-
 	return nil
 }
