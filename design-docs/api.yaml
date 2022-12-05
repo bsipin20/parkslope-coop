@@ -1,0 +1,140 @@
+---
+openapi: 3.0.0
+info:
+  title: Simple Inventory API
+  description: This is a simple API
+  contact:
+    email: you@your-company.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/bsipin20/produceprices/1.0.0
+  description: SwaggerHub API Auto Mocking
+- url: https://virtserver.swaggerhub.com/bsipin20/nbabracket/1.0.0
+  description: SwaggerHub API Auto Mocking
+tags:
+- name: admins
+  description: Secured Admin-only calls
+- name: developers
+  description: Operations available to regular developers
+paths:
+  /v1/producepricetimeline/:
+    get:
+      tags:
+      - developers
+      summary: returns produce prices over time given a list of produce prices
+      description: |
+        By passing in the appropriate options, you can search for
+        produce prices by a filter
+      operationId: searchProduceTimelines
+      parameters:
+      - name: searchQuery
+        in: query
+        description: pass an optional search string for looking up inventory
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: startdate
+        in: query
+        description: date (utc) for when to show dates
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: integer
+      - name: enddate
+        in: query
+        description: date (utc) for when to end on dates
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: integer
+      responses:
+        "200":
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProducePriceTimeline'
+        "400":
+          description: bad input parameter
+  /v1/produceitems/:
+    get:
+      tags:
+      - developers
+      summary: returns unique produce items to be searched on
+      description: |
+        By passing in the appropriate options, you can search for
+        produce prices by a filter
+      operationId: searchProduceItems
+      parameters:
+      - name: searchQuery
+        in: query
+        description: pass an optional search string for looking up produces
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                example:
+                - Apples
+                - Bananas
+                - Kiwi
+                - Blueberries
+                items:
+                  type: string
+        "400":
+          description: bad input parameter
+components:
+  schemas:
+    ProducePriceTimeline:
+      required:
+      - date
+      - id
+      - price
+      - produce_name
+      - unit
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        name:
+          type: string
+          example: Bananas
+        timeline:
+          $ref: '#/components/schemas/ProducePrices'
+    ProducePrices:
+      required:
+      - name
+      type: array
+      items:
+        $ref: '#/components/schemas/ProducePrices_inner'
+    ProducePrices_inner:
+      properties:
+        date:
+          type: integer
+          example: 214384283
+        price:
+          type: number
+          example: 40.5
+        unit:
+          type: string
+          example: per lb
