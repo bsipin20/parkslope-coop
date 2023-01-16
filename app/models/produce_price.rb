@@ -12,7 +12,9 @@
 #
 class ProducePrice < ApplicationRecord
   def self.search(search)
-    if search
+    if search.blank?
+      raise(ArgumentError.new("Search string cannot be blank"))
+    else
       where("label LIKE :search ", search: "%#{search}%")
     end
   end

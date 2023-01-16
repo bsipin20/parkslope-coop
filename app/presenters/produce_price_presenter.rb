@@ -19,7 +19,7 @@ class ProducePricePresenter
     @produce_prices.all.each do |row| 
       record = {}
       record[DATE] = row[DATE]
-      record[[row[LABEL]]] = row[PRICE].to_f
+      record[row[LABEL]] = row[PRICE].to_f
       @response.append(record)
     end
     @response

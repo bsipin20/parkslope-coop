@@ -14,7 +14,7 @@ UNIT = 'unit'
 LABEL = 'item'
 DATE = 'date'
 
-CSV.foreach(("db/data/2022-12-07.csv"), headers: true, col_sep: ",") do |row|
+CSV.foreach(("db/data/2022-12-06.csv"), headers: true, col_sep: ",") do |row|
   ProducePrice.create(label: row[LABEL].strip(),
                       date:  row[DATE],
                       unit:  row[UNIT],
