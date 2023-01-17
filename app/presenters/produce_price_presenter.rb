@@ -4,9 +4,11 @@ class ProducePricePresenter
   LABEL = 'label'
   PRICE = 'price'
 
-  def initialize(input)
+  def initialize(input, items: nil)
     @produce_prices = input
-    @response = []
+    @response = {}
+    @response[:items] = items
+    @response[:prices] = []
   end
 
   def show
@@ -20,7 +22,7 @@ class ProducePricePresenter
       record = {}
       record[DATE] = row[DATE]
       record[row[LABEL]] = row[PRICE].to_f
-      @response.append(record)
+      @response[:prices].append(record)
     end
     @response
   end
