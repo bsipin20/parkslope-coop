@@ -15,7 +15,7 @@ class ProducePrice < ApplicationRecord
     if search.blank?
       raise(ArgumentError.new("Search string cannot be blank"))
     else
-      where("label LIKE :search ", search: "%#{search}%")
+      where("lower(label) LIKE :search ", search: "%#{search.downcase}%")
     end
   end
 end
