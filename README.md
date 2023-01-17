@@ -1,7 +1,9 @@
-# parkslope-coop
+# README
 
-design docs here
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
+<<<<<<< HEAD
 https://docs.google.com/presentation/d/1bgVEZK-_TedfflUmv5w4YYcDqkzgEeIaeSCww5KlEak/edit?usp=sharing
 
 
