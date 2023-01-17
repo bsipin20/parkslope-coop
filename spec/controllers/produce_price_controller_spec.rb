@@ -27,6 +27,8 @@ RSpec.describe ProducePriceController do
     it "search empty string return error" do
       get :index, params: {search: ""}
       response_body = JSON.parse(response.body)
+      expect(response_body["status"]).to eq(422)
+      expect(response_body["errors"]).to eq("Search string cannot be blank")
     end
   end
 end
