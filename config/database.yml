@@ -6,7 +6,6 @@ default: &default
   username: postgres
   password: password
   pool: 5
-  timeout: 5000
 
 development:
   <<: *default
