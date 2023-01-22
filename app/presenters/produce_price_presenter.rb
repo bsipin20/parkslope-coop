@@ -19,32 +19,33 @@ class ProducePricePresenter
   private
 
   def timeline
-    @items.each do |item|
-      prices = []
-      dates = []
-      units = []
-      record = {}
-
-      @produce_prices.all.where(label: item).each do |row|
-        prices.append(row[PRICE])
-        dates.append(row[DATE])
-        units.append(unit_label(row[UNIT]))
+    last_label = "START"
+    curr_item = {}
+    ordered = @produce_prices.order(:label, date: :asc)
+    ordered.each do |row|
+      if row[LABEL] != last_label
+        @response[:prices].append(curr_item) if !curr_item.empty?
+        curr_item = {}
+        curr_item[UNIT] = parse_label(row[UNIT])
+        curr_item[LABEL] = row[LABEL]
+        curr_item[PRICE+'s'] = [row[PRICE]]
+        curr_item[DATE+'s'] = [row[DATE]]
+        last_label = row[LABEL]
+      else
+        curr_item[PRICE+'s'].append(row[PRICE])
+        curr_item[DATE+'s'].append(row[DATE])
+        last_label = row[LABEL]
       end
-
-      record[LABEL] = item
-      record[DATE+'s'] = dates
-      record[PRICE+'s'] = prices
-      record[UNIT+'s'] = units
-      @response[:prices].append(record)
     end
+    @response[:prices].append(curr_item)
     @response
   end
 
-  def unit_label(row_unit_label)
-    if row_unit_label == "each"
-      "each"
-    elsif row_unit_label == "per pound"
+  def parse_label(row_unit_label)
+    if row_unit_label == "per pound"
       "lb"
+    else
+      row_unit_label
     end
   end
 end
