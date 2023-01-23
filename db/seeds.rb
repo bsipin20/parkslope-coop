@@ -14,9 +14,18 @@ UNIT = 'unit'
 LABEL = 'item'
 DATE = 'date'
 
+inc = 0
 CSV.foreach(("db/data/2022-12-07.csv"), headers: true, col_sep: ",") do |row|
+  p "Seeding value: #{inc}" if inc % 1000 == 0
   ProducePrice.create(label: row[LABEL].strip(),
                       date:  row[DATE],
                       unit:  row[UNIT],
                       price: row[PRICE])
+  inc += 1
 end
+
+puts 'Seeding Labels...'
+ProducePrice.distinct.pluck(:label, :unit).each do |row|
+  ProduceLabel.create!(label: row.first, unit: row.second)
+end
+
