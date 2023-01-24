@@ -1,6 +1,7 @@
 class ProducePriceController < ApplicationController
 
   def index
+    ProduceLabel.search
     prices = ProducePrice.search(params[:search])
     items = prices.pluck(:label).uniq
     render json: ProducePricePresenter.new(prices, items: items).show

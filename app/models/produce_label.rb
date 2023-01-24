@@ -9,4 +9,5 @@
 #  updated_at :datetime         not null
 #
 class ProduceLabel < ApplicationRecord
+  has_many :produce_prices, :class_name => "::ProducePrice"
 end

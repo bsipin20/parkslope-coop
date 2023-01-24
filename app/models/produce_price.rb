@@ -11,6 +11,8 @@
 #  updated_at :datetime         not null
 #
 class ProducePrice < ApplicationRecord
+  belongs_to :produce_labels
+
   def self.search(search)
     if search.blank?
       raise(ArgumentError.new("Search string cannot be blank"))

@@ -15,6 +15,8 @@ LABEL = 'item'
 DATE = 'date'
 
 inc = 0
+
+labels = {}
 CSV.foreach(("db/data/2022-12-07.csv"), headers: true, col_sep: ",") do |row|
   p "Seeding value: #{inc}" if inc % 1000 == 0
   ProducePrice.create(label: row[LABEL].strip(),
