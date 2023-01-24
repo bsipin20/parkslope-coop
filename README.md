@@ -22,3 +22,8 @@ docker-compose exec web rails db:seed
 ```
 curl "localhost:3000/producepricetimeline?search=apple"
 ```
+
+* install node modules and start application
+```
+npm i --prefix client && npm start --prefix client
+```
