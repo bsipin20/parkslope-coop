@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom"
 import './App.css';
 import SearchBar from "./components/SearchBar";
 import ProduceListContainer from "./components/ProduceListContainer";
+import NavBar from "./components/NavBar";
+import About from "./components/About";
+import BigMovers from "./components/BigMovers";
 
 function App() {
   const [priceData, setPriceData] = useState([]);
@@ -29,18 +33,27 @@ function App() {
 
   return (
     <div className="App">
-      <h2>Parkslope Coop</h2>
-      <SearchBar
-        search={search}
-        setSearch={setSearch}
-        handleSubmit={handleSubmit}
+      <NavBar />
+      <Routes>
+        <Route path="/search"
+          element={
+            <>
+              <SearchBar
+                search={search}
+                setSearch={setSearch}
+                handleSubmit={handleSubmit}
 
-      />
-      <ProduceListContainer
-        priceData={priceData}
-        produceData={produceData}
-        setProduceData={setProduceData}
-      />
+              />
+              <ProduceListContainer
+                priceData={priceData}
+                produceData={produceData}
+                setProduceData={setProduceData}
+              />
+            </>
+          } />
+        <Route path="/about" element={<About />} />
+        <Route path="/bigmovers" element={<BigMovers />} />
+      </Routes>
     </div>
   );
 }

@@ -31,6 +31,16 @@ function PriceChart({ produceData }) {
                 position: 'top',
             }
         },
+        scales: {
+            x: {
+                ticks: {
+                    callback: function (val, index) {
+                        return index % 3 === 0 ? this.getLabelForValue(val) : "";
+                    },
+                    color: 'black',
+                }
+            }
+        }
     };
 
     return (

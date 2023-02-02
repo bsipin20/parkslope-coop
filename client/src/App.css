@@ -7,12 +7,6 @@
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -24,15 +18,76 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+#main-container {
+  display: inline-flex;
+  margin-top: 1em;
+  height: 500px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#price-chart {
+  display: inline-block;
+  width: 70%;
+  min-width: 650px;
+  height: 500px;
+  border: 1px solid lightgray;
+  border-radius: 8px;
+  margin: 0 0.25em;
+}
+
+#produce-list-container {
+  display: inline-block;
+  width: 27.5%;
+  border: 1px solid lightgray;
+  border-radius: 8px;
+  margin: 0 0.25em;
+}
+
+.produce-list-items {
+  list-style-type: none;
+  text-align: left;
+
+}
+
+.produce-list-items>li:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  color: green;
+}
+
+.produce-list-items>.selected {
+  border: 1px solid green;
+  font-weight: 700;
+  background-color: rgba(20, 140, 191, 0.5);
+  list-style-type: disclosure-closed;
+}
+
+#navbar-container {
+  width: 100%;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 1em;
+  padding-left: 1em;
+  display: inline-flex;
+  box-shadow: 0 7px 7px -1px lightgray;
+}
+
+#navbar-list {
+  list-style-type: none;
+  display: inline-flex;
+  margin: auto 0;
+
+}
+
+#navbar-list>a {
+  text-decoration: none;
+  color: black;
+  padding: 0 1.5em;
+}
+
+#price-table {
+  width: 30%;
+  max-height: 500px;
+  overflow-y: scroll;
+  border: 1px solid lightgray;
+  border-radius: 8px;
+  margin: 0 0.25em;
 }
