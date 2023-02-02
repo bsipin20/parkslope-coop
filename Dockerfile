@@ -1,13 +1,14 @@
 # syntax=docker/dockerfile:1
 FROM ruby:3.1.0
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
-WORKDIR
+#WORKDIR
 #COP/myapp/Gemfile
 #COPY Gemfile.lock /myapp/Gemfile.lock
+COPY . .
+
+
 RUN bundle install
 
-
-COPY . .
 
 
 # Add a script to be executed every time the container starts.
