@@ -18,7 +18,7 @@ function App() {
   }, []);
 
   const request = async () => {
-    let req = await fetch(`http://parkslopeproduce-api-v1:10000/producepricetimeline?search=${search}`);
+    let req = await fetch(`parkslopeproduce-api-v1:10000/producepricetimeline?search=${search}`);
     let res = await req.json();
     if (req.ok) {
       setPriceData(res.prices);
