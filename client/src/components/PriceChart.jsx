@@ -44,7 +44,7 @@ function PriceChart({ produceData }) {
     };
 
     return (
-        <div>
+        <div style={{ maxHeight: "100%" }}>
             <h3>Price Chart for {produceData[0].label}</h3>
             <Line
                 data={data}
