@@ -11,8 +11,11 @@ function SearchBar({ search, setSearch, handleSubmit }) {
                     type="text"
                     placeholder="search produce..."
                     name="search"
+                    required
                     value={search}
                     onChange={handleChange}
+                    onInvalid={e => e.target.setCustomValidity("Search for a produce item. Try 'blueberries'")}
+                    onInput={e => e.target.setCustomValidity("")}
                 >
                 </input>
                 <input
