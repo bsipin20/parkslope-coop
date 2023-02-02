@@ -1,8 +1,9 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import PriceChart from "./PriceChart";
+import "../styles/produceListContainer.css";
 
-function ProduceListContainer({ priceData }) {
-    const [produceData, setProduceData] = useState("");
+function ProduceListContainer({ priceData, produceData, setProduceData }) {
+
 
     if (!priceData.length) {
         return
@@ -25,13 +26,15 @@ function ProduceListContainer({ priceData }) {
             </li>
         )
     })
-    return (<div>
-        <h4>Produce List</h4>
-        <ul>
-            {produceList}
-        </ul>
-        {priceData.length && <PriceChart produceData={produceData} />}
-    </div>)
+    return (
+        <div id="produce-list-container">
+            <h4>Produce List</h4>
+            <ul>
+                {produceList}
+            </ul>
+            {priceData.length && <PriceChart produceData={produceData} />}
+        </div>
+    )
 }
 
 export default ProduceListContainer;

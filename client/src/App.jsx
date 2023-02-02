@@ -6,22 +6,24 @@ import ProduceListContainer from "./components/ProduceListContainer";
 function App() {
   const [priceData, setPriceData] = useState([]);
   const [search, setSearch] = useState("");
+  const [produceData, setProduceData] = useState([]);
 
   useEffect(() => {
-    if (!search) return
+    if (!search) return;
     request();
-  }, [])
+  }, []);
 
   const request = async () => {
     let req = await fetch(`/producepricetimeline?search=${search}`);
     let res = await req.json();
     if (req.ok) {
-      setPriceData(res.prices)
+      setPriceData(res.prices);
     };
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setProduceData([]);
     request();
   }
 
@@ -32,9 +34,12 @@ function App() {
         search={search}
         setSearch={setSearch}
         handleSubmit={handleSubmit}
+
       />
       <ProduceListContainer
         priceData={priceData}
+        produceData={produceData}
+        setProduceData={setProduceData}
       />
     </div>
   );
