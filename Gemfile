@@ -6,6 +6,7 @@ ruby "3.1.0"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4"
 gem 'annotate', group: :development
+gem 'nokogiri'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -32,6 +33,10 @@ gem "jbuilder"
 gem 'rspec-rails', ">= 3.9.0"
 gem 'pry'
 gem 'pry-nav'
+
+gem 'vcr'
+gem 'sidekiq'
+
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
@@ -73,6 +78,7 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
+  gem 'rspec-sidekiq'
   gem "selenium-webdriver"
   gem "webdrivers"
 end
