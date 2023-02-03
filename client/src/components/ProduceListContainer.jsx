@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PriceChart from "./PriceChart";
 import PriceTable from "./PriceTable";
+import SummaryTable from "./SummaryTable";
 import "../App.css"
 
 function ProduceListContainer({ priceData, produceData, setProduceData }) {
@@ -33,13 +34,21 @@ function ProduceListContainer({ priceData, produceData, setProduceData }) {
                 <ul className="produce-list-items">
                     {produceList}
                 </ul>
+                <button
+                    onClick={() => setShowPriceTable(val => !val)}
+                    style={{ display: produceData.length ? true : 'none' }}
+                >
+                    {showPriceTable ? "Hide Table" : "Show Table"}
+                </button>
+            </div>
+            <div>
+                {showPriceTable && <SummaryTable produceData={produceData[0]} />}
+                {showPriceTable && <PriceTable produceData={produceData[0]} />}
             </div>
             {priceData.length &&
                 <div id="price-chart">
                     <PriceChart produceData={produceData} />
-                    <button onClick={() => setShowPriceTable(val => !val)}>{showPriceTable ? "Hide Table" : "Show Table"}</button>
                 </div>}
-            {showPriceTable && <PriceTable produceData={produceData[0]} />}
         </div>
     )
 }
