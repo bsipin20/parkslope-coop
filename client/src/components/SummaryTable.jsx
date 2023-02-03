@@ -4,6 +4,8 @@ function SummaryTable({ produceData }) {
     const today = new Date("2023-01-23"); // hardcoded to most recent datapoint. Remove string argument when price data is up to date
     const milliSecsInDay = 24 * 60 * 60 * 1000;
 
+    if (!produceData?.label) return;
+
     const summaryTableCalc = (numOfDays) => {
         const lastDateTime = new Date(today - numOfDays * milliSecsInDay);
         const dateIndex = produceData?.dates.findLastIndex(date => {
@@ -12,12 +14,12 @@ function SummaryTable({ produceData }) {
         })
 
         const pricesFromLastDate = produceData?.prices.slice(dateIndex + 1);
-        const avgPrice = pricesFromLastDate.reduce((a, c) => a + parseFloat(c), 0) / numOfDays;
+        const avgPrice = pricesFromLastDate?.reduce((a, c) => a + parseFloat(c), 0) / (pricesFromLastDate.length);
 
         return {
-            "Avg": avgPrice.toFixed(2),
-            "High": Math.max(...pricesFromLastDate),
-            "Low": Math.min(...pricesFromLastDate)
+            "Avg": !avgPrice ? "N/A" : avgPrice.toFixed(2),
+            "High": !avgPrice ? "-" : Math.max(...pricesFromLastDate),
+            "Low": !avgPrice ? "-" : Math.min(...pricesFromLastDate)
         }
     }
 

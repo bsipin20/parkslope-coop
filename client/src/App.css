@@ -45,7 +45,8 @@
 .produce-list-items {
   list-style-type: none;
   text-align: left;
-
+  max-height: 375px;
+  overflow-y: scroll;
 }
 
 .produce-list-items>li:hover {

@@ -1,5 +1,7 @@
 
 function PriceTable({ produceData }) {
+    if (!produceData?.label) return;
+
     const produceTableRows = produceData?.dates.map((date, index) => {
         return (
             <tr key={index}>
