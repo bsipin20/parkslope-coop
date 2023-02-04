@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   get "/producepricetimeline", to: "produce_price#index"
-  mount Sidekiq::Web => '/sidekiq'
+
 end
