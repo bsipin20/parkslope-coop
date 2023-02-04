@@ -37,6 +37,8 @@ gem 'pry-nav'
 gem 'vcr'
 gem 'sidekiq'
 
+gem "sidekiq-cron"
+
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
