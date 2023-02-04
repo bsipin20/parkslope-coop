@@ -45,7 +45,8 @@
 .produce-list-items {
   list-style-type: none;
   text-align: left;
-
+  max-height: 375px;
+  overflow-y: scroll;
 }
 
 .produce-list-items>li:hover {
@@ -84,10 +85,22 @@
 }
 
 #price-table {
-  width: 30%;
-  max-height: 500px;
+  /* width: 30%; */
+  max-height: 250px;
   overflow-y: scroll;
   border: 1px solid lightgray;
   border-radius: 8px;
   margin: 0 0.25em;
+}
+
+#summary-table {
+  height: 250px;
+  display: inline-flex;
+  border: 1px solid lightgray;
+  border-radius: 8px;
+  margin: 0 0.25em;
+}
+
+#summary-table>table {
+  width: 350px;
 }
