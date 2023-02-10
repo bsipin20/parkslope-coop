@@ -11,6 +11,16 @@
 #  updated_at :datetime         not null
 #
 class ProducePrice < ApplicationRecord
+
+  def self.update_or_create(attributes)
+    assign_or_new(attributes).save
+  end
+
+  def self.assign_or_new(attributes)
+    obj = first || new
+    obj.assign_attributes(attributes)
+    obj
+  end
   def self.search(search)
     if search.blank?
       raise(ArgumentError.new("Search string cannot be blank"))
